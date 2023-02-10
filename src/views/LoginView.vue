@@ -1,7 +1,7 @@
 <script setup>
   import { reactive, ref } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
-  import { useAuthRepository } from '@/composable';
+  import { useAuthRepository } from '@/composables';
 
   const repository = useAuthRepository();
   const route = useRoute();
