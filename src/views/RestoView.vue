@@ -1,9 +1,10 @@
 <script setup>
 import { useRestoRepository } from "@/composables";
 import { ref, onMounted } from "vue";
-import { RouterLink } from "vue-router";
+import BaseCard from "../components/BaseCard.vue";
 
   const repository = useRestoRepository();
+
   const isLoading = ref(true);
   const restos = ref([]);
   const fetchRestos = async () => {
@@ -31,13 +32,12 @@ import { RouterLink } from "vue-router";
       <div class="grid grid-cols-12 gap-4 py-4">
         <div v-for="resto in restos" :key="resto.id" class="col-span-4">
           <!-- Card -->
-          <RouterLink
-            :to="{ name: 'restos-show', params: { id: resto.id } }"
-            class="block bg-white shadow p-4 rounded select-none"
-          >
-            <h1 class="text-lg font-bold capitalize">{{ resto.name }}</h1>
-            <p class="text-gray-500">{{ excerpt(resto.description, 40) }}</p>
-        </RouterLink>
+          <BaseCard :to="{ name: 'restos-show', params: { id: resto.id } }">
+          <template #title>
+            {{ resto.name }}
+          </template>
+          {{ excerpt(resto.description, 40) }}
+        </BaseCard>
         </div>
       </div>
     </div>
